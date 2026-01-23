@@ -1,6 +1,5 @@
 import { AudioEngine } from "./AudioEngine"
 import { Song } from "../data/types"
-import audioFile from "../../public/505.mp3?url"
 
 export function testAudioEngine() {
   const button = document.createElement("button")
@@ -20,7 +19,7 @@ export function testAudioEngine() {
       title: "Test Tone",
       artist: "Test Artist",
       durationSec: 10,
-      audioUrl: audioFile
+      audioUrl: "505.mp3"
     }
 
     console.log("▶️ Playing:", song.title)

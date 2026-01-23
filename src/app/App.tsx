@@ -1,8 +1,11 @@
+import React from "react"
+import { MainLayout } from "../ui/layout/MainLayout"
+
 export default function App() {
   return (
-    <div>
+    <MainLayout>
       <h1>Private Music Player</h1>
-      <p>Check the console for audio engine test results</p>
-    </div>
+      {/* Other routes or library components will go here */}
+    </MainLayout>
   )
 }

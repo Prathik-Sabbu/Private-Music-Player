@@ -1,5 +1,8 @@
+import { Song } from "../data/types"
+
 export class AudioEngine{
     private audio: HTMLAudioElement
+    private currentSong: Song | null = null
 
     constructor(){
         this.audio = new Audio()
@@ -12,12 +15,24 @@ export class AudioEngine{
         }
     }
 
-    play(){
-        this.audio.play()
+    play(song: Song){
+        // if the same song just resume
+        if (this.currentSong?.id === song.id){
+            this.audio?.play()
+            return
+        }
+
+        // load new song
+        this.currentSong = song
+        if (!this.audio) return
+
+        this.audio.src = song.audioUrl
+        this.audio.currentTime = 0
+        this.audio.play()        
     }
 
     pause(){
-        this.audio.pause()
+        this.audio?.pause()
     }
 
     stop(){
@@ -38,3 +53,5 @@ export class AudioEngine{
     }
 
 }
+
+export const audioEngine = new AudioEngine()

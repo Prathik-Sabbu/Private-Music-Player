@@ -7,7 +7,7 @@ const sampleSong: Song = {
     title: "Test Tone",
     artist: "Test Artist",
     durationSec: 10,
-    audioUrl: "505.mp3"
+    audioUrl: "/505.mp3"  
 }
 
 export function PlayerBar() {

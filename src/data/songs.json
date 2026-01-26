@@ -3,7 +3,35 @@
     "id": "505",
     "title": "505",
     "artist": "Arctic Monkeys",
-    "durationSec": 240,
-    "audioUrl": "/505.mp3"
+    "durationSec": 253,
+    "audioUrl": "/music/505.mp3"
+  },
+  {
+    "id": "FWU",
+    "title": "FWU",
+    "artist": "Don Toliver",
+    "durationSec": 120,
+    "audioUrl": "/music/FWU.mp3"
+  },
+  {
+    "id": "No Idea",
+    "title": "No Idea",
+    "artist": "Don Toliver",
+    "durationSec": 153,
+    "audioUrl": "/music/No Idea.mp3"
+  },
+  {
+    "id": "No Pole",
+    "title": "No Pole",
+    "artist": "Don Toliver",
+    "durationSec": 255,
+    "audioUrl": "/music/No Pole.mp3"
+  },
+  {
+    "id": "Tiramisu",
+    "title": "Tiramisu",
+    "artist": "Don Toliver",
+    "durationSec": 143,
+    "audioUrl": "/music/Tiramisu.mp3"
   }
 ]

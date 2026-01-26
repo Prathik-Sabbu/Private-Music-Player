@@ -1,5 +1,5 @@
-import { AudioEngine } from "./AudioEngine"
-import { Song } from "../data/types"
+import { AudioEngine } from "../src/audio/AudioEngine"
+import { Song } from "../src/data/types"
 
 export function testAudioEngine() {
   const button = document.createElement("button")
@@ -16,7 +16,7 @@ export function testAudioEngine() {
 
     const song: Song = {
       id: "test",
-      title: "Test Tone",
+      title: "505 Tone",
       artist: "Test Artist",
       durationSec: 10,
       audioUrl: "505.mp3"

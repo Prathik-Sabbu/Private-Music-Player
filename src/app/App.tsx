@@ -1,11 +1,14 @@
-import React from "react"
-import { MainLayout } from "../ui/layout/MainLayout"
+import { AudioProvider } from "../state/AudioContext"
+import { SongList } from "../ui/library/SongList"
+import { PlayerBar } from "../ui/layout/PlayerBar"
 
-export default function App() {
+function App() {
   return (
-    <MainLayout>
-      <h1>Private Music Player</h1>
-      {/* Other routes or library components will go here */}
-    </MainLayout>
+    <AudioProvider>
+      <SongList />
+      <PlayerBar />
+    </AudioProvider>
   )
 }
+
+export default App

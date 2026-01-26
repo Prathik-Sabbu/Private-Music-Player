@@ -1,8 +1,8 @@
 import React from "react"
-import { useAudio } from "../../hooks/useAudio"
+import { useAudioContext } from "../../state/AudioContext"
 
 export function PlayerBar() {
-    const { currentSong, isPlaying, play, pause } = useAudio()
+    const { currentSong, isPlaying, play, pause } = useAudioContext()
 
     return (
     <div style={{ padding: "1rem", borderTop: "1px solid #ccc" }}>

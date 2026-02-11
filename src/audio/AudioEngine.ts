@@ -4,6 +4,16 @@ export class AudioEngine{
     private audio: HTMLAudioElement
     private currentSong: Song | null = null
 
+    public seek(time: number): void {
+        if (this.audio) {
+            this.audio.currentTime = time;
+        }
+    }
+
+    public getCurrentTime(): number {
+        return this.audio ? this.audio.currentTime : 0;
+    }
+
     constructor(){
         this.audio = new Audio()
         this.audio.preload = "auto"
@@ -40,16 +50,8 @@ export class AudioEngine{
         this.audio.currentTime = 0
     }
 
-    seek(seconds : number){
-        this.audio.currentTime = seconds
-    }
-
     onEnded(callback: () => void){
         this.audio.onended = callback
-    }
-
-    getCurrentTime(){
-        return this.audio.currentTime
     }
 
 }

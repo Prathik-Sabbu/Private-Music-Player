@@ -16,16 +16,31 @@ export type PlayerState = {
   volume: number
   isShuffle: boolean
   isRepeat: boolean
+  currentTime: number;
+  duration: number;
+  seek: (time: number) => void;
+  skipForward: () => void;
+  skipBackward: () => void;
 }
 
 export const initialPlayerState: PlayerState = {
-  status: "idle",
-  currentSong: null,
-  queue: [],
-  positionSec: 0,
-  volume: 1,
-  isShuffle: false,
-  isRepeat: false,
+    status: "idle",
+    currentSong: null,
+    queue: [],
+    positionSec: 0,
+    volume: 1,
+    isShuffle: false,
+    isRepeat: false,
+    seek: (time) => {
+        get().audioEngine.seek(time);
+        set({ currentTime: time });},
+    skipForward: () => {
+        const newTime = get().audioEngine.getCurrentTime() + 10;
+        get().seek(newTime);},
+    skipBackward: () => {
+        const newTime = Math.max(0, get().audioEngine.getCurrentTime() - 10);
+        get().seek(newTime);
+    }   
 }
 
 export function playSong(state: PlayerState, song: Song, queue: Song[] = []): PlayerState {

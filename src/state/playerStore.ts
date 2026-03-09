@@ -1,4 +1,6 @@
 import { Song } from "../data/types"
+import { create } from 'zustand'
+import { audioEngine } from "../audio/AudioEngine"
 
 export type PlayerStatus =
   | "idle"
@@ -23,24 +25,16 @@ export type PlayerState = {
   skipBackward: () => void;
 }
 
-export const initialPlayerState: PlayerState = {
-    status: "idle",
-    currentSong: null,
-    queue: [],
+export const initialPlayerState = {
+    status: "idle" as PlayerStatus,
+    currentSong: null as Song | null,
+    queue: [] as Song[],
     positionSec: 0,
+    currentTime: 0,
+    duration: 0,
     volume: 1,
     isShuffle: false,
     isRepeat: false,
-    seek: (time) => {
-        get().audioEngine.seek(time);
-        set({ currentTime: time });},
-    skipForward: () => {
-        const newTime = get().audioEngine.getCurrentTime() + 10;
-        get().seek(newTime);},
-    skipBackward: () => {
-        const newTime = Math.max(0, get().audioEngine.getCurrentTime() - 10);
-        get().seek(newTime);
-    }   
 }
 
 export function playSong(state: PlayerState, song: Song, queue: Song[] = []): PlayerState {
@@ -89,3 +83,19 @@ export function playNext(state: PlayerState): PlayerState{
         positionSec: 0,
     }
 }
+
+export const usePlayerStore = create<PlayerState>()((set, get) => ({
+    ...initialPlayerState,
+    seek: (time) => {
+        audioEngine.seek(time);
+        set({ currentTime: time });
+    },
+    skipForward: () => {
+        const newTime = audioEngine.getCurrentTime() + 10;
+        get().seek(newTime);
+    },
+    skipBackward: () => {
+        const newTime = Math.max(0, audioEngine.getCurrentTime() - 10);
+        get().seek(newTime);
+    },
+}))

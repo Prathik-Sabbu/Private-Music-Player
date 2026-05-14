@@ -1,16 +1,31 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Home, Search, Library, Music2 } from 'lucide-react';
+import { usePlayerStore } from '../store/playerStore';
 
-const SongRow = ({ song }) => {
+const SongRow = ({ song, songList = [] }) => {
+
+    const playSong = usePlayerStore((state) => state.playSong);
+    const isCurrent = usePlayerStore((state) => state.currentSong?.id === song.id);
+
+    const titleColor = isCurrent ? 'text-[#ff0000]' : 'text-white';
+
     return (
-        <div className="flex items-center gap-4 p-4 hover:bg-[#1a1a1a] rounded">
-            <img src={song.album.cover} alt={song.title} className="w-12 h-12 rounded" />
-            <div className="flex-1">
-                <p className="text-sm font-medium">{song.title}</p>
-                <p className="text-xs text-gray-400">{song.artist}</p>
-                <p className="text-xs text-gray-400">{song.album.title}</p>
-            </div>
+        <div onClick={() => playSong(song, songList)} className={`flex items-center gap-4 p-3 hover:bg-white/5 rounded-lg cursor-pointer transition-colors ${isCurrent ? 'bg-white/10' : ''}`}>
+                <img src={song.cover} alt={song.title} className="w-12 h-12 rounded object-cover shadow-lg" />
+                
+                <div className="flex-1 min-w-0">
+                    <p className={`text-[15px] font-semibold truncate ${titleColor}`}>{song.title}</p>
+                    <p className="text-xs text-gray-400 truncate">{song.artist} · {Math.floor(song.duration / 60)}:{String(song.duration % 60).padStart(2, '0')}</p>
+                </div>
+
+                {isCurrent && (
+                <div className="flex gap-[2px] items-end h-3 mb-1">
+                    <div className="w-1 bg-red-500 animate-pulse h-full"></div>
+                    <div className="w-1 bg-red-500 animate-pulse h-2"></div>
+                    <div className="w-1 bg-red-500 animate-pulse h-3"></div>
+                </div>
+            )}
         </div>
     );
 }
+
+export default SongRow;

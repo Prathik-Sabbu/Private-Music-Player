@@ -51,7 +51,7 @@ const songs = [
     genre: "Hip-Hop/Rap",
     duration: 159, 
     
-    src: "/music/Don Toliver - Cardigan [Official Visualizer] - (320 Kbps).mp3", 
+    src: "/music/Don Toliver - Cardigan [Official Music Video] - (320 Kbps).mp3", 
     cover: "/icons/heaven or hell.jpg",
     format: "mp3",
     bitrate: "320 Kbps", 
@@ -135,7 +135,7 @@ const songs = [
     genre: "Hip Hop/Pop",
     duration: 209, 
     
-    src: "/music/Don Toliver - Lose My Mind [Official Video] - (320 Kbps).mp3", 
+    src: "/music/Don Toliver - Lose My Mind (feat. Doja Cat) [From F1® The Movie] [Official Music Video] - (320 Kbps).mp3", 
     cover: "/icons/F1_FRONT-COVER_FINAL.jpg",
     format: "mp3",
     bitrate: "320 Kbps", 
@@ -177,7 +177,7 @@ const songs = [
     genre: "Hip-Hop/Rap",
     duration: 187, 
     
-    src: "/music/Don Toliver - No Pole [Official Music Video] - (320 Kbps).mp3", 
+    src: "/music/Don Toliver - No Pole [Official Visualizer] - (320 Kbps).mp3", 
     cover: "/icons/LoveSick.jpg",
     format: "mp3",
     bitrate: "320 Kbps", 
@@ -282,7 +282,7 @@ const songs = [
     genre: "Hip-Hop/Rap",
     duration: 213, 
     
-    src: "/music/Don Toliver - You [Official Audio] - (320 Kbps).mp3", 
+    src: "/music/Don Toliver - You (feat. Travis Scott) [Official Audio] - (320 Kbps).mp3", 
     cover: "/icons/Life of a Don.jpg",
     format: "mp3",
     bitrate: "320 Kbps", 

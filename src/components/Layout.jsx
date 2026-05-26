@@ -1,5 +1,6 @@
 import React from 'react';
 import BottomNav from './BottomNav.jsx';
+import PlayerBar from './PlayerBar.jsx';
 
 const Layout = ({ children }) => {
 
@@ -10,6 +11,7 @@ const Layout = ({ children }) => {
         </main>
 
         <div className="fixed bottom-0 left-0 right-0 z-50 w-full bg-[#030303] border-t border-white/10">
+            <PlayerBar />
             <BottomNav />
         </div>
         </div>

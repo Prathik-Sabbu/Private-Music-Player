@@ -10,7 +10,7 @@ type PlayerState = {
     repeatMode : 'off' | 'repeat' | 'repeatOne';
     volume: number;
 
-    playsong: (song: any, songList: any[]) => void;
+    playSong: (song: any, songList: any[]) => void;
     pauseResume: () => void;
     toggleShuffle: () => void;
     nextSong: () => void;
@@ -37,7 +37,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     repeatMode: 'off',
     volume: 1,
 
-    playsong: (song, songList) => {
+    playSong: (song, songList) => {
         set ({currentSong: song, 
                         currentSongList: songList,
                         queue: songList.slice(songList.indexOf(song) + 1), 

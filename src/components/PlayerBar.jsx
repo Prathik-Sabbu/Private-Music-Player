@@ -52,7 +52,7 @@ const PlayerBar = ({onClick}) => {
 
             <div className="flex items-center gap-4 pr-1">
                 <button 
-                    onClick={(e) => { e.stopPropagation(); toggleRepeat(); }}
+                    onClick={(e) => { e.stopPropagation(); toggleRepeat();}}
                     className="text-gray-500 hover:text-gray-300 transition p-1">
                     {repeatMode === 'repeatOne' ? (
                         <Repeat1 size={18} className="text-red-500" />
@@ -62,14 +62,14 @@ const PlayerBar = ({onClick}) => {
                 </button>
 
                 <button 
-                    onClick={(e) => { e.stopPropagation(); prevSong(); }}
+                    onClick={(e) => { e.stopPropagation(); prevSong(); usePlayerStore.setState({ isPlaying: true });}}
                     className="text-gray-400 hover:text-white active:scale-95 transition p-1"
                 >
                     <SkipBack size={20} fill="currentColor" />
                 </button>
 
                 <button 
-                    onClick={(e) => { e.stopPropagation(); pauseResume(); }}
+                    onClick={(e) => { e.stopPropagation(); pauseResume();}}
                     className="bg-white text-black p-2 rounded-full hover:scale-105 active:scale-95 transition shadow-md flex items-center justify-center"
                 >
                     {isPlaying ? (
@@ -80,7 +80,7 @@ const PlayerBar = ({onClick}) => {
                 </button>
 
                 <button 
-                    onClick={(e) => { e.stopPropagation(); nextSong(); }}
+                    onClick={(e) => { e.stopPropagation(); nextSong(); usePlayerStore.setState({ isPlaying: true });}}
                     className="text-gray-400 hover:text-white active:scale-95 transition p-1"
                 >
                     <SkipForward size={20} fill="currentColor" />

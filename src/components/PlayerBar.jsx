@@ -2,7 +2,7 @@ import { usePlayerStore } from '../store/playerStore';
 import React from 'react';
 import { Play, Pause, SkipForward, SkipBack, Repeat, Repeat1 } from 'lucide-react';
 
-const PlayerBar = () => {
+const PlayerBar = ({onClick}) => {
     const currentSong = usePlayerStore((state) => state.currentSong);
     const isPlaying = usePlayerStore((state) => state.isPlaying);
     const progress = usePlayerStore((state) => state.progress);
@@ -21,7 +21,6 @@ const PlayerBar = () => {
 
     return (
         <div className="relative w-full bg-[#121212]/95 backdrop-blur-md text-white px-4 py-2 flex items-center justify-between h-16 border-b border-white/5 cursor-pointer">
-            
             <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-zinc-800">
                 <div 
                     className="h-full bg-red-600 transition-all duration-300 ease-linear" 
@@ -29,7 +28,7 @@ const PlayerBar = () => {
                 />
             </div>
 
-            <div className="flex items-center gap-3 w-7/12 min-w-0">
+            <div className="flex items-center gap-3 w-auto max-w-[50%] min-w-0 flex-shrink-0">
                 <img 
                     src={currentSong.cover} 
                     alt={currentSong.title} 
@@ -44,6 +43,12 @@ const PlayerBar = () => {
                     </p>
                 </div>
             </div>
+
+            <div 
+                onClick={onClick} 
+                className="flex-1 h-full cursor-pointer bg-transparent"
+                title="Tap to open sheet"
+            />
 
             <div className="flex items-center gap-4 pr-1">
                 <button 

@@ -8,10 +8,11 @@ import { usePlayerStore } from '../store/playerStore';
 export default function LibraryPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeTab, setActiveTab] = useState('songs');
-    const tab = ['songs', 'albums', 'artists'];
+    const tab = ['songs', 'albums', 'artists', 'liked'];
 
     const [selectedAlbum, setSelectedAlbum] = useState(null);
     const [selectedArtist, setSelectedArtist] = useState(null);
+    const likedsongIndex = usePlayerStore((state) => state.likedsongIndex);
 
     const filteredSongs = songs.filter(song =>
         song.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -153,6 +154,22 @@ export default function LibraryPage() {
                             ) : (
                                 <div className="text-center text-zinc-500 py-8 text-sm">No albums found matching "{searchTerm}"</div>
                             )
+                        )}
+
+                        {activeTab === 'liked' && (
+                            (() => {
+                                const likedSongs = filteredSongs.filter(song => likedsongIndex.includes(song.id));
+
+                                return likedSongs.length > 0 ? (
+                                    likedSongs.map((song) => (
+                                        <SongRow key={song.id} song={song} songList={likedSongs} />
+                                    ))
+                                ) : (
+                                    <div className="text-center text-zinc-500 py-8 text-sm">
+                                        No liked songs found matching your search.
+                                    </div>
+                                );
+                            })()
                         )}
 
                         {activeTab === 'artists' && (

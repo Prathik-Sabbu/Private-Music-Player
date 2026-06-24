@@ -23,6 +23,8 @@ type PlayerState = {
     moveInQueue: (fromIndex: number, toIndex: number) => void;
     removeFromQueue: (index: number) => void;
     clearQueue: () => void;
+    likedsongIndex: string[];
+    toggleLiked: (songId: string) => void;
 }
 
 const audio = new Audio();
@@ -176,7 +178,18 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
 
     clearQueue: () => {
         set({ queue: [] });
-    }
+    },
+
+    likedsongIndex: [],
+
+    toggleLiked: (songId: string) => {
+        const { likedsongIndex } = get();
+        if (likedsongIndex.includes(songId)) {
+            set({ likedsongIndex: likedsongIndex.filter((id) => id !== songId) });
+        } else {
+            set({ likedsongIndex: [...likedsongIndex, songId] });
+        }
+    },
 
 }));
 

@@ -33,6 +33,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     currentSong: null,
     currentSongList: [],
     queue: [],
+    currentQueue: [],
     isPlaying: false,
     progress: 0,
     shuffle: false,
@@ -77,6 +78,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
 
     nextSong: () => {
         const { repeatMode, queue, currentSongList, shuffle, currentSong } = get();
+        let currentQueue = queue;
         if (repeatMode === 'repeatOne') {
             if (audio) {
                 audio.currentTime = 0;
@@ -87,15 +89,16 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
 
         if (queue.length === 0) {
             if (repeatMode === 'repeat') {
-                const newQueue = shuffle ? [...currentSongList].sort(() => Math.random() - 0.5) : currentSongList.slice(currentSongList.indexOf(currentSong) + 1);
+                const newQueue = shuffle ? [...currentSongList].sort(() => Math.random() - 0.5) : [...currentSongList];
                 set({ queue: newQueue });
+                currentQueue = newQueue;
             } else {
                 set({ isPlaying: false });
                 return;
             }
         }
-        const nextSong = queue[0];
-        set({ currentSong: nextSong, queue: queue.slice(1) });
+        const nextSong = currentQueue[0];
+        set({ currentSong: nextSong, queue: currentQueue.slice(1) });
         if (audio) {
             audio.src = nextSong.src;
             audio.currentTime = 0;

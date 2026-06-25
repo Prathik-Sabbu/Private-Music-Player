@@ -103,6 +103,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
             audio.src = nextSong.src;
             audio.currentTime = 0;
             audio.play();
+            //set({ isPlaying: true });
         }
     },
     
@@ -122,6 +123,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
                 audio.src = previousSong.src;
                 audio.currentTime = 0;
                 audio.play();
+                set({ isPlaying: true });
             }
         } else {
             audio.currentTime = 0;

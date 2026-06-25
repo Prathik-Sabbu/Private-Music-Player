@@ -90,9 +90,7 @@ const NowPlayingSheet = ({ isOpen, onClose }) => {
                     <Shuffle size={20}/>
                 </button>
 
-                <button onClick={() => {
-                    prevSong();
-                    usePlayerStore.setState({ isPlaying: true });}}
+                <button onClick={() => {prevSong();}}
                 className="p-2 text-zinc-300 hover:text-white transition active:scale-90">
                     <SkipBack size={28} fill="currentColor"/>
                 </button>
@@ -102,9 +100,7 @@ const NowPlayingSheet = ({ isOpen, onClose }) => {
                     {isPlaying ? <Pause size={28} fill="currentColor"/> : <Play size={28} fill="currentColor" className="ml-[3px]"/>}
                 </button>
 
-                <button onClick={() => {
-                    nextSong();
-                    usePlayerStore.setState({ isPlaying: true });}}
+                <button onClick={() => {nextSong();}}
                 className="p-2 text-zinc-300 hover:text-white transition active:scale-90">
                     <SkipForward size={28} fill="currentColor"/>
                 </button>

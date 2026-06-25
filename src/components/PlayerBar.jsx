@@ -62,7 +62,7 @@ const PlayerBar = ({onClick}) => {
                 </button>
 
                 <button 
-                    onClick={(e) => { e.stopPropagation(); prevSong(); usePlayerStore.setState({ isPlaying: true });}}
+                    onClick={(e) => { e.stopPropagation(); prevSong();}}
                     className="text-gray-400 hover:text-white active:scale-95 transition p-1"
                 >
                     <SkipBack size={20} fill="currentColor" />
@@ -80,7 +80,7 @@ const PlayerBar = ({onClick}) => {
                 </button>
 
                 <button 
-                    onClick={(e) => { e.stopPropagation(); nextSong(); usePlayerStore.setState({ isPlaying: true });}}
+                    onClick={(e) => { e.stopPropagation(); nextSong();}}
                     className="text-gray-400 hover:text-white active:scale-95 transition p-1"
                 >
                     <SkipForward size={20} fill="currentColor" />

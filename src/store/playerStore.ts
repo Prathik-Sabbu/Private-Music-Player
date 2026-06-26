@@ -25,9 +25,12 @@ type PlayerState = {
     clearQueue: () => void;
     likedsongIndex: string[];
     toggleLiked: (songId: string) => void;
+    recentlyPlayed: { songId: string, timestamp: number }[];
+    addToRecentlyPlayed: (songId: string) => void;
 }
 
 const audio = new Audio();
+let currentTrackLogged = false;
 
 export const usePlayerStore = create<PlayerState>((set, get) => ({
     currentSong: null,
@@ -39,12 +42,15 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     shuffle: false,
     repeatMode: 'off',
     volume: 1,
+    recentlyPlayed: [],
 
     playSong: (song, songList) => {
         set ({currentSong: song, 
                         currentSongList: songList,
                         queue: songList.slice(songList.indexOf(song) + 1), 
                         isPlaying: true, progress: 0 });
+
+        currentTrackLogged = false;
 
         if (audio) {
             audio.src = song.src;
@@ -83,6 +89,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
             if (audio) {
                 audio.currentTime = 0;
                 audio.play();
+                currentTrackLogged = false;
             }
             return;
         }
@@ -99,6 +106,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
         }
         const nextSong = currentQueue[0];
         set({ currentSong: nextSong, queue: currentQueue.slice(1) });
+        currentTrackLogged = false;
         if (audio) {
             audio.src = nextSong.src;
             audio.currentTime = 0;
@@ -111,6 +119,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
         if(audio && audio.currentTime > 3) {
             audio.currentTime = 0;
             audio.play();
+            currentTrackLogged = false;
             return;
         }
 
@@ -119,6 +128,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
         if (currentIndex > 0) {
             const previousSong = currentSongList[currentIndex - 1];
             set({ currentSong: previousSong, queue: [currentSong, ...queue] });
+            currentTrackLogged = false;
             if (audio) {
                 audio.src = previousSong.src;
                 audio.currentTime = 0;
@@ -129,6 +139,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
             audio.currentTime = 0;
             if (isPlaying) {
                 audio.play();
+                currentTrackLogged = false;
             }
         }
     },
@@ -196,6 +207,25 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
         }
     },
 
+    addToRecentlyPlayed: (songId: string) => {
+        const { recentlyPlayed } = get();
+        if (recentlyPlayed.length > 0 && recentlyPlayed[0].songId === songId) {
+            set({
+                recentlyPlayed: [
+                    { songId, timestamp: Date.now() },
+                    ...recentlyPlayed.slice(1)
+                ]
+            });
+        } else {
+            set({
+                recentlyPlayed: [
+                    { songId, timestamp: Date.now() },
+                    ...recentlyPlayed
+                ]
+            });
+        }
+    },
+
 }));
 
 audio.onended = () => {
@@ -205,4 +235,17 @@ audio.onended = () => {
 
 audio.ontimeupdate = () => {
     usePlayerStore.setState({ progress: audio.currentTime });
+
+    // Skip-protection gate check
+    const store = usePlayerStore.getState();
+    const currentSong = store.currentSong;
+    if (currentSong && !currentTrackLogged) {
+        const duration = currentSong.duration || audio.duration;
+        if (duration) {
+            if (audio.currentTime >= 30 || audio.currentTime >= duration / 2) {
+                store.addToRecentlyPlayed(currentSong.id);
+                currentTrackLogged = true;
+            }
+        }
+    }
 };

@@ -189,7 +189,7 @@ const NowPlayingSheet = ({ isOpen, onClose }) => {
                             {currentSong.title}
                         </h2>
                         <p className="text-sm text-zinc-400 truncate mt-1">
-                            {currentSong.artist}
+                            {currentSong.artist}{currentSong.features && currentSong.features.length > 0 ? ` (feat. ${currentSong.features.join(', ')})` : ''}
                         </p>
                     </div>
                     <button onClick={() => toggleLiked(currentSong.id)}

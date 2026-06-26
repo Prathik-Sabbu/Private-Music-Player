@@ -39,7 +39,7 @@ const PlayerBar = ({onClick}) => {
                         {currentSong.title}
                     </p>
                     <p className="text-xs text-gray-400 truncate">
-                        {currentSong.artist}
+                        {currentSong.artist}{currentSong.features && currentSong.features.length > 0 ? ` (feat. ${currentSong.features.join(', ')})` : ''}
                     </p>
                 </div>
             </div>

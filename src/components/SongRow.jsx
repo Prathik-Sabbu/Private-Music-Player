@@ -22,7 +22,9 @@ const SongRow = ({ song, songList = [] }) => {
                     <p className={`text-[15px] font-medium truncate ${isCurrent ? 'text-red-500' : 'text-white'}`}>
                         {song.title}
                     </p>
-                    <p className="text-xs text-zinc-400 truncate mt-0.5">{song.artist}</p>
+                    <p className="text-xs text-zinc-400 truncate mt-0.5">
+                        {song.artist}{song.features && song.features.length > 0 ? ` (feat. ${song.features.join(', ')})` : ''}
+                    </p>
                 </div>
             </div>
 

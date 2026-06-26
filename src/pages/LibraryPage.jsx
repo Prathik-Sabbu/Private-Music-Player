@@ -17,11 +17,12 @@ export default function LibraryPage() {
     const filteredSongs = songs.filter(song =>
         song.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         song.artist.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (song.features && song.features.some(f => f.toLowerCase().includes(searchTerm.toLowerCase()))) ||
         song.album.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     const uniqueAlbums = [...new Set(filteredSongs.map(s => s.album))];
-    const uniqueArtists = [...new Set(filteredSongs.map(s => s.artist))];
+    const uniqueArtists = [...new Set(filteredSongs.flatMap(s => [s.artist, ...(s.features || [])]))].sort();
 
     const playContextList = (contextList) => {
         if (contextList.length > 0) {
@@ -97,7 +98,10 @@ export default function LibraryPage() {
                 ) : selectedArtist ? (
                     
                     (() => {
-                        const artistTracks = songs.filter(s => s.artist.toLowerCase().includes(selectedArtist.toLowerCase()));
+                        const artistTracks = songs.filter(s => 
+                            s.artist.toLowerCase() === selectedArtist.toLowerCase() ||
+                            (s.features && s.features.some(f => f.toLowerCase() === selectedArtist.toLowerCase()))
+                        );
                         return (
                             <div className="flex flex-col gap-4 animate-in fade-in duration-200">
                                 <button 
@@ -175,7 +179,7 @@ export default function LibraryPage() {
                         {activeTab === 'artists' && (
                             uniqueArtists.length > 0 ? (
                                 uniqueArtists.map((artistName, index) => {
-                                    const artistSong = songs.find(s => s.artist === artistName);
+                                    const artistSong = songs.find(s => s.artist === artistName || (s.features && s.features.includes(artistName)));
                                     return (
                                         <div key={index}
                                             onClick={() => setSelectedArtist(artistName)}

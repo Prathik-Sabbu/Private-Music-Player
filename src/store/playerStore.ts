@@ -7,7 +7,7 @@ type PlayerState = {
     isPlaying: boolean;
     progress: number;
     shuffle: boolean;
-    repeatMode : 'off' | 'repeat' | 'repeatOne';
+    repeatMode: 'off' | 'repeat' | 'repeatOne';
     volume: number;
 
     playSong: (song: any, songList: any[]) => void;
@@ -45,10 +45,12 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     recentlyPlayed: [],
 
     playSong: (song, songList) => {
-        set ({currentSong: song, 
-                        currentSongList: songList,
-                        queue: songList.slice(songList.indexOf(song) + 1), 
-                        isPlaying: true, progress: 0 });
+        set({
+            currentSong: song,
+            currentSongList: songList,
+            queue: songList.slice(songList.indexOf(song) + 1),
+            isPlaying: true, progress: 0
+        });
 
         currentTrackLogged = false;
 
@@ -114,9 +116,9 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
             set({ isPlaying: true });
         }
     },
-    
+
     prevSong: () => {
-        if(audio && audio.currentTime > 3) {
+        if (audio && audio.currentTime > 3) {
             audio.currentTime = 0;
             audio.play();
             currentTrackLogged = false;
@@ -236,7 +238,6 @@ audio.onended = () => {
 audio.ontimeupdate = () => {
     usePlayerStore.setState({ progress: audio.currentTime });
 
-    // Skip-protection gate check
     const store = usePlayerStore.getState();
     const currentSong = store.currentSong;
     if (currentSong && !currentTrackLogged) {

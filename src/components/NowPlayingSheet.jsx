@@ -148,7 +148,7 @@ const NowPlayingSheet = ({ isOpen, onClose }) => {
                 transition: isSwipingSheet ? 'none' : 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
                 touchAction: 'pan-y'
             }}
-            className="absolute inset-0 z-50 bg-[#030303] flex flex-col h-full w-full px-6 pb-2 pt-4 select-none overscroll-behavior-x-contain">
+            className="absolute inset-0 z-[60] bg-[#030303] flex flex-col h-full w-full px-6 pb-2 pt-4 select-none overscroll-behavior-x-contain">
             <div className="w-full flex justify-center items-center h-4 mb-2">
                 <div className="w-10 h-1 bg-zinc-800 rounded-full opacity-60" />
             </div>

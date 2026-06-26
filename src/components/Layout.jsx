@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
 
             <div className="w-full h-full sm:max-w-[393px] sm:h-[852px] bg-black sm:rounded-[52px] sm:shadow-[0_0_50px_rgba(0,0,0,0.8)] sm:border-[8px] sm:border-zinc-800 overflow-hidden relative flex flex-col select-none isolate text-white">
                 
-                <div className="hidden sm:block absolute top-3 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-full z-[60] pointer-events-none" />
+                <div className="hidden sm:block absolute top-3 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-full z-[70] pointer-events-none" />
 
                 <NowPlayingSheet isOpen={SheetOpen} onClose={() => setSheetOpen(false)} />
 

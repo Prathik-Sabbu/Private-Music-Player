@@ -20,7 +20,7 @@ const PlayerBar = ({onClick}) => {
 
 
     return (
-        <div className="relative w-full bg-[#121212]/95 backdrop-blur-md text-white px-4 py-2 flex items-center justify-between h-16 border-b border-white/5 cursor-pointer">
+        <div onClick={onClick} className="relative w-full bg-[#121212]/95 backdrop-blur-md text-white px-4 py-2 flex items-center justify-between h-16 border-b border-white/5 cursor-pointer">
             <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-zinc-800">
                 <div 
                     className="h-full bg-red-600 transition-all duration-300 ease-linear" 
@@ -43,12 +43,6 @@ const PlayerBar = ({onClick}) => {
                     </p>
                 </div>
             </div>
-
-            <div 
-                onClick={onClick} 
-                className="flex-1 h-full cursor-pointer bg-transparent"
-                title="Tap to open sheet"
-            />
 
             <div className="flex items-center gap-4 pr-1">
                 <button 

@@ -12,7 +12,7 @@ const BottomNav = () => {
     ];
 
     return (
-        <nav className="flex justify-around items-center bg-[#0f0f0f] border-t border-white/10 pt-2 pb-6 px-4">
+        <nav className="flex justify-around items-center bg-[#0f0f0f] border-t border-white/10 pt-2 pb-4 px-4">
         {navItems.map((item) => (
             <NavLink
             end={item.end || false}
